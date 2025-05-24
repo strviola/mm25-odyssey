@@ -29,8 +29,31 @@ function App() {
     // onStop,
   });
 
-  const artistSpan = document.querySelector('#artist span')
-  const songSpan = document.querySelector('#song span')
+  const playButtons = document.querySelectorAll('.play');
+  const jumpButton = document.querySelector('#jump');
+
+  const artistSpan = document.querySelector('#artist span');
+  const songSpan = document.querySelector('#song span');
+
+  // TextAlive App が初期化された時に呼ばれる
+  function onAppReady(app) {
+    if (!app.managed) {
+      document.querySelector('#control').style.display = 'block';
+
+      // 再生ボタン
+      playButtons.forEach((playButton) => {
+        playButton.addEventListener('click', () => {
+          player.video && player.requestPlay();
+        })
+      });
+
+      // 歌詞頭出しボタン
+      jumpButton.addEventListener('click', () => {
+        player.video &&
+        player.requestMediaSeek(player.video.firstChar.startTime);
+      });
+    }
+  }
 
   // 動画オブジェクトの準備が整ったとき（楽曲に関する情報を読み込み終わったとき）に呼ばれる
   // param v: IVideo
