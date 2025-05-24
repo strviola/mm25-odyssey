@@ -20,7 +20,7 @@ function App() {
 
   // Register event listeners
   player.addListener({
-    // onAppReady,
+    onAppReady,
     onVideoReady,
     // onTimerReady,
     // onThrottledTimeUpdate,
@@ -30,10 +30,6 @@ function App() {
   });
 
   const playButtons = document.querySelectorAll('.play');
-  const jumpButton = document.querySelector('#jump');
-
-  const artistSpan = document.querySelector('#artist span');
-  const songSpan = document.querySelector('#song span');
 
   // TextAlive App が初期化された時に呼ばれる
   function onAppReady(app) {
@@ -48,9 +44,47 @@ function App() {
       });
 
       // 歌詞頭出しボタン
+      const jumpButton = document.querySelector('#jump');
       jumpButton.addEventListener('click', () => {
         player.video &&
         player.requestMediaSeek(player.video.firstChar.startTime);
+      });
+
+      // 一時停止ボタン
+      const pauseButton = document.querySelector('#pause');
+      pauseButton.addEventListener('click', () => {
+        player.video && player.requestPause();
+      });
+
+      // 巻き戻しボタン
+      const rewindButton = document.querySelector('#rewind');
+      rewindButton.addEventListener('click', () => {
+        player.video && player.requestMediaSeek(0);
+      });
+
+      // "TextAlive ホストの有無" にリンクを設定
+      const url = 'https://developer.textalive.jp/app/run/?ta_app_url=https%3A%2F%2Ftextalivejp.github.io%2Ftextalive-app-basic%2F&ta_song_url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DygY2qObZv24';
+      document.querySelector('#header a').setAttribute('href', url);
+    } else {
+      const url = 'https://textalivejp.github.io/textalive-app-basic/';
+      document.querySelector('#header a').setAttribute('href', url);
+    }
+
+    // 音楽データを読み込む
+    if (!app.songUrl) {
+      // ロンリーラン / 海風太陽
+      player.createFromSongUrl("https://piapro.jp/t/CyPO/20250128183915", {
+        video: {
+          // 音楽地図訂正履歴
+          beatId: 4_694_280,
+          chordId: 2_830_735,
+          repetitiveSegmentId: 2_946_483,
+    
+          // 歌詞URL: https://piapro.jp/t/jn89
+          // 歌詞タイミング訂正履歴: https://textalive.jp/lyrics/piapro.jp%2Ft%2FCyPO%2F20250128183915
+          lyricId: 67_815,
+          lyricDiffId: 20_659
+        },
       });
     }
   }
@@ -60,6 +94,8 @@ function App() {
   // https://developer.textalive.jp/packages/textalive-app-api/interfaces/ivideo.html
   function onVideoReady(v) {
     // metadata
+    const artistSpan = document.querySelector('#artist span');
+    const songSpan = document.querySelector('#song span');
     artistSpan.textContent = player.data.song.artist.name;
     songSpan.textContent = player.data.song.name;
 
@@ -93,7 +129,7 @@ function App() {
         </div>
         <ul>
           <li>発声中の歌詞テキストがあれば表示されます</li>
-          <li>TextAlive ホストの有無により再生コントロールの表示状態が切り替わります</li>
+          <li><a>TextAlive ホストの有無</a>により再生コントロールの表示状態が切り替わります</li>
         </ul>
       </div>
       <div id="footer">
