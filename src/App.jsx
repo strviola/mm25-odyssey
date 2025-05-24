@@ -50,7 +50,42 @@ function App() {
 
   return (
     <>
-      <span id="text">TextAlive references here.</span>
+      <div id="overlay">
+        <button className="play" disabled>Play</button>
+      </div>
+      <div id="container">
+        <p id="lyrics">
+          <span id="text"></span>
+        </p>
+      </div>
+      <div id="media"></div>
+      <div id="header">
+        <div id="meta">
+          <div id="artist">
+            <strong>Artist:</strong> <span>-</span>
+          </div>
+          <div id="song">
+            <strong>Song title:</strong> <span>-</span>
+          </div>
+        </div>
+        <ul>
+          <li>発声中の歌詞テキストがあれば表示されます</li>
+          <li>TextAlive ホストの有無により再生コントロールの表示状態が切り替わります</li>
+        </ul>
+      </div>
+      <div id="footer">
+        <p>
+          <span id="position">
+            <strong>-</strong> [ms]
+          </span>
+        </p>
+        <div id="control" style={{display: "none"}}>
+          <button className="play" disabled>再生</button>
+          <button id="jump" disabled>歌詞頭出し</button>
+          <button id="pause" disabled>一時停止</button>
+          <button id="rewind" disabled>巻き戻し</button>
+        </div>
+      </div>
     </>
   )
 }
