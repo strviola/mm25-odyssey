@@ -22,14 +22,13 @@ function App() {
   player.addListener({
     onAppReady,
     onVideoReady,
-    // onTimerReady,
-    // onThrottledTimeUpdate,
-    // onPlay,
-    // onPause,
-    // onStop,
+    onTimerReady,
+    onThrottledTimeUpdate,
+    onPlay,
+    onPause,
+    onStop,
   });
 
-  const playButtons = document.querySelectorAll('.play');
 
   // TextAlive App が初期化された時に呼ばれる
   function onAppReady(app) {
@@ -37,30 +36,30 @@ function App() {
       document.querySelector('#control').style.display = 'block';
 
       // 再生ボタン
-      playButtons.forEach((playButton) => {
+      document.querySelectorAll('.play').forEach((playButton) => {
         playButton.addEventListener('click', () => {
           player.video && player.requestPlay();
         })
       });
 
       // 歌詞頭出しボタン
-      const jumpButton = document.querySelector('#jump');
-      jumpButton.addEventListener('click', () => {
-        player.video &&
-        player.requestMediaSeek(player.video.firstChar.startTime);
-      });
+      document.querySelector('#jump')
+        .addEventListener('click', () => {
+          player.video &&
+          player.requestMediaSeek(player.video.firstChar.startTime);
+        });
 
       // 一時停止ボタン
-      const pauseButton = document.querySelector('#pause');
-      pauseButton.addEventListener('click', () => {
-        player.video && player.requestPause();
-      });
+      document.querySelector('#pause')
+        .addEventListener('click', () => {
+          player.video && player.requestPause();
+        });
 
       // 巻き戻しボタン
-      const rewindButton = document.querySelector('#rewind');
-      rewindButton.addEventListener('click', () => {
-        player.video && player.requestMediaSeek(0);
-      });
+      document.querySelector('#rewind')
+        .addEventListener('click', () => {
+          player.video && player.requestMediaSeek(0);
+        });
 
       // "TextAlive ホストの有無" にリンクを設定
       const url = 'https://developer.textalive.jp/app/run/?ta_app_url=https%3A%2F%2Ftextalivejp.github.io%2Ftextalive-app-basic%2F&ta_song_url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DygY2qObZv24';
@@ -107,6 +106,36 @@ function App() {
     }
   }
 
+  function onTimerReady(_timer) {
+    if (!player.managed) {
+      // ボタンを有効化する
+      document.querySelectorAll('button')
+        .forEach((button) => {
+          button.disabled = false
+        });
+    }
+
+    // 歌詞が無ければ歌詞頭出しボタンを無効にする
+    document.querySelector('#jump').disabled = !player.video.firstChar;
+  }
+
+  function onThrottledTimeUpdate(position) {
+    document.querySelector('#position strong')
+      .textContent = String(Math.floor(position));
+  }
+
+  function onPlay() {
+    document.querySelector('#overlay').style.display = 'none';
+  }
+
+  function onPause() {
+    document.querySelector('#text').textContent = '-';
+  }
+
+  function onStop() {
+    document.querySelector('text').textContent = '-'
+  }
+
   return (
     <>
       <div id="overlay">
@@ -129,7 +158,7 @@ function App() {
         </div>
         <ul>
           <li>発声中の歌詞テキストがあれば表示されます</li>
-          <li><a>TextAlive ホストの有無</a>により再生コントロールの表示状態が切り替わります</li>
+          <li><a target="_blank">TextAlive ホストの有無</a>により再生コントロールの表示状態が切り替わります</li>
         </ul>
       </div>
       <div id="footer">
