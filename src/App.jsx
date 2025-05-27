@@ -1,15 +1,9 @@
 import { Player } from "textalive-app-api";
 
+import { animateWord } from './animateWord'
 import './App.css'
 
 function App() {
-  // 単語が発声されていたら #text に表示する
-  const animateWord = function (now, unit) {
-    if (unit.contains(now)) {
-      document.querySelector("#text").textContent = unit.text;
-    }
-  };
-
   // TextAlive Player を作る
   const apiToken = import.meta.env.VITE_TEXTALIVE_API_TOKEN;
   console.log(apiToken);
@@ -28,7 +22,6 @@ function App() {
     onPause,
     onStop,
   });
-
 
   // TextAlive App が初期化された時に呼ばれる
   function onAppReady(app) {
