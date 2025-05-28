@@ -1,6 +1,6 @@
 import { Player } from "textalive-app-api";
-import { animateWord } from './animateWord'
-import { TextView } from "./TextView";
+import { animateWord } from './components/animateWord'
+import { TextView } from "./components/TextView";
 import './App.css'
 
 function App() {
