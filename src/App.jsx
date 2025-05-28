@@ -1,6 +1,6 @@
 import { Player } from "textalive-app-api";
-
 import { animateWord } from './animateWord'
+import { TextView } from "./TextView";
 import './App.css'
 
 function App() {
@@ -134,11 +134,7 @@ function App() {
       <div id="overlay">
         <button className="play" disabled>Play</button>
       </div>
-      <div id="container">
-        <p id="lyrics">
-          <span id="text"></span>
-        </p>
-      </div>
+      <TextView />
       <div id="media"></div>
       <div id="header">
         <div id="meta">

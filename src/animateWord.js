@@ -2,8 +2,6 @@
 export const animateWord = function (now, unit) {
   if (unit.contains(now)) {
     const textElement = document.querySelector('#text');
-    if (textElement) {
-      textElement.textContent = unit.text;
-    }
+    textElement.textContent = unit.text;
   }
 }
