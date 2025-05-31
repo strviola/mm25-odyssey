@@ -1,7 +1,7 @@
 import { Player } from "textalive-app-api";
-import { animateWord } from './components/animateWord'
 import { TextView } from "./components/TextView";
 import './App.css'
+import { animateMain } from "./animateMain";
 
 function App() {
   // TextAlive Player を作る
@@ -85,18 +85,7 @@ function App() {
   // param v: IVideo
   // https://developer.textalive.jp/packages/textalive-app-api/interfaces/ivideo.html
   function onVideoReady(v) {
-    // metadata
-    const artistSpan = document.querySelector('#artist span');
-    const songSpan = document.querySelector('#song span');
-    artistSpan.textContent = player.data.song.artist.name;
-    songSpan.textContent = player.data.song.name;
-
-    // 定期的に呼ばれる各単語の "animate" 関数をセットする
-    let w = player.video.firstWord;
-    while (w) {
-      w.animate = animateWord;
-      w = w.next;
-    }
+    animateMain(v, player);
   }
 
   function onTimerReady(_timer) {
