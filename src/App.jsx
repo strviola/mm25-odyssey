@@ -17,7 +17,7 @@ function App() {
     onAppReady,
     onVideoReady,
     onTimerReady,
-    onThrottledTimeUpdate,
+    onTimeUpdate,
     onPlay,
     onPause,
     onStop,
@@ -101,7 +101,7 @@ function App() {
     document.querySelector('#jump').disabled = !player.video.firstChar;
   }
 
-  function onThrottledTimeUpdate(position) {
+  function onTimeUpdate(position) {
     document.querySelector('#position strong')
       .textContent = String(Math.floor(position));
   }
