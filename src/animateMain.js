@@ -7,15 +7,18 @@ export const animateMain = (_video, player) => {
 
   // 定期的に呼ばれる各単語の "animate" 関数をセットする
   let w = player.video.firstWord;
+  let renderingText = '';
   const textContainer = document.querySelector('#text');
   while (w) {
     w.animate = (now, unit) => {
-      // 単語が発声されていたら #text に表示する
-      if (unit.contains(now)) {
+      // 単語が発声かつ更新されていたら #text に表示する
+      let pronouncingText = unit.text;
+      if (unit.contains(now) && renderingText !== pronouncingText) {
+        debugger;
+        renderingText = pronouncingText;
         const textElement = document.createElement('span');
-        const text = document.createTextNode(unit.text);
+        const text = document.createTextNode(pronouncingText);
         textElement.appendChild(text);
-        console.log(textElement);
         textContainer.appendChild(textElement);
       }
     };
