@@ -1,7 +1,11 @@
-import { Simulation, SpaceObjectPresets, Ephem } from 'spacekit.js';
+import {
+  Simulation,
+  SpaceObjectPresets,
+  Ephem,
+} from 'spacekit.js';
 
 const viz = new Simulation(document.getElementById('spacekit-container'), {
-    basePath: './node_modules/spacekit.js/src',
+  basePath: './node_modules/spacekit.js/src',
 });
 
 // Create a background using Yale Bright Star Catalog data.
@@ -21,7 +25,7 @@ viz.createObject('uranus', SpaceObjectPresets.URANUS);
 viz.createObject('neptune', SpaceObjectPresets.NEPTUNE);
 
 // generate asteroid
-const asteroid = new Ephem({
+const ephem = new Ephem({
   a: 7.55,
   e: 0.8726,
   i: 110.55 * Math.PI / 180,
@@ -31,10 +35,25 @@ const asteroid = new Ephem({
   epoch: Math.random() * 2500000,
 });
 
-viz.createObject('asteroid_1', {
-  hideOrbit: false,
-  particleSize: 10,
-  labelText: 'Asteroid',
-  textureUrl: '{{assets}}/sprites/fuzzyparticle.png',
-  ephem: asteroid,
+const shapeData = 'https://raw.githubusercontent.com/typpo/spacekit/master/examples/asteroid_shape_from_earth/A1046.M1863.obj'
+
+const asteroid = viz.createShape('asteroid', {
+  ephem: ephem,
+  shape: {
+    shapeUrl: shapeData,
+  },
+  rotation: {
+    lambdaDeg: 251,
+    betaDeg: -63,
+    period: 3.755067,
+    yorp: 1.9e-8,
+    phi0: 0,
+    jd0: 2443568.0,
+  },
 });
+
+asteroid.initRotation();
+asteroid.startRotation();
+viz.createLight([0, 0, 0]);
+viz.createAmbientLight();
+viz.getViewer().followObject(asteroid, [-0.01, -0.01, 0.01]);
