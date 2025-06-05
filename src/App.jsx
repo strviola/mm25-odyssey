@@ -16,7 +16,11 @@ function App() {
     app: { token: apiToken },
     mediaElement: document.querySelector('#media')
   });
-
+  // setup spacekit    
+  const viz = new Simulation(document.getElementById('spacekit-container'), {
+    basePath: './node_modules/spacekit.js/src',
+  });
+  
   // Register event listeners
   player.addListener({
     onAppReady,
@@ -84,11 +88,6 @@ function App() {
         },
       });
     }
-
-    // setup spacekit    
-    const viz = new Simulation(document.getElementById('spacekit-container'), {
-      basePath: './node_modules/spacekit.js/src',
-    });
     
     // Create a background using Yale Bright Star Catalog data.
     viz.createStars();
@@ -111,7 +110,7 @@ function App() {
   // param v: IVideo
   // https://developer.textalive.jp/packages/textalive-app-api/interfaces/ivideo.html
   function onVideoReady(v) {
-    animateMain(v, player);
+    animateMain(v, player, viz);
   }
 
   function onTimerReady(_timer) {
@@ -150,7 +149,6 @@ function App() {
         <button className="play" disabled>Play</button>
       </div>
       <TextView />
-      <div id="spacekit-container"></div>
       <div id="media"></div>
       <div id="header">
         <div id="meta">
