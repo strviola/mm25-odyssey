@@ -1,7 +1,7 @@
-import { Simulation, SpaceObjectPresets, Ephem } from 'spacekit.js';
+import { Simulation, SpaceObjectPresets } from 'spacekit.js';
 
 const viz = new Simulation(document.getElementById('spacekit-container'), {
-    basePath: 'https://typpo.github.io/spacekit/src',
+    basePath: './node_modules/spacekit.js/src',
 });
 
 // Create a background using Yale Bright Star Catalog data.
