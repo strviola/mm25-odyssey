@@ -22,19 +22,19 @@ viz.createObject('neptune', SpaceObjectPresets.NEPTUNE);
 
 // generate asteroid
 const asteroid = new Ephem({
-    a: 7.55,
-    e: 0.8726,
-    i: 110.55 * Math.PI / 180,
-    om: 134.9919 * Math.PI / 180,
-    w: 152.76 * Math.PI / 180,
-    ma: 0,
-    epoch: Math.random() * 2500000,
+  a: 7.55,
+  e: 0.8726,
+  i: 110.55 * Math.PI / 180,
+  om: 134.9919 * Math.PI / 180,
+  w: 152.76 * Math.PI / 180,
+  ma: 0,
+  epoch: Math.random() * 2500000,
 });
 
 viz.createObject('asteroid_1', {
-    hideOrbit: false,
-    particleSize: 10,
-    labelText: 'Asteroid',
-    textureUrl: '{{assets}}/sprites/fuzzyparticle.png',
-    ephem: asteroid,
+  hideOrbit: false,
+  particleSize: 10,
+  labelText: 'Asteroid',
+  textureUrl: '{{assets}}/sprites/fuzzyparticle.png',
+  ephem: asteroid,
 });
