@@ -2,6 +2,11 @@ import { Player } from "textalive-app-api";
 import { TextView } from "./components/TextView";
 import './App.css'
 import { animateMain } from "./animateMain";
+import {
+  Simulation,
+  SpaceObjectPresets,
+  // Ephem,
+} from 'spacekit.js';
 
 function App() {
   // TextAlive Player を作る
@@ -79,6 +84,27 @@ function App() {
         },
       });
     }
+
+    // setup spacekit    
+    const viz = new Simulation(document.getElementById('spacekit-container'), {
+      basePath: './node_modules/spacekit.js/src',
+    });
+    
+    // Create a background using Yale Bright Star Catalog data.
+    viz.createStars();
+    
+    // Create our first object - the sun - using a preset space object.
+    viz.createObject('sun', SpaceObjectPresets.SUN);
+    
+    // Then add some planets
+    viz.createObject('mercury', SpaceObjectPresets.MERCURY);
+    viz.createObject('venus', SpaceObjectPresets.VENUS);
+    viz.createObject('earth', SpaceObjectPresets.EARTH);
+    viz.createObject('mars', SpaceObjectPresets.MARS);
+    viz.createObject('jupiter', SpaceObjectPresets.JUPITER);
+    viz.createObject('saturn', SpaceObjectPresets.SATURN);
+    viz.createObject('uranus', SpaceObjectPresets.URANUS);
+    viz.createObject('neptune', SpaceObjectPresets.NEPTUNE);    
   }
 
   // 動画オブジェクトの準備が整ったとき（楽曲に関する情報を読み込み終わったとき）に呼ばれる
@@ -124,6 +150,7 @@ function App() {
         <button className="play" disabled>Play</button>
       </div>
       <TextView />
+      <div id="spacekit-container"></div>
       <div id="media"></div>
       <div id="header">
         <div id="meta">
