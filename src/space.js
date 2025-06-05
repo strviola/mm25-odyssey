@@ -35,12 +35,10 @@ const ephem = new Ephem({
   epoch: Math.random() * 2500000,
 });
 
-const shapeData = 'https://raw.githubusercontent.com/typpo/spacekit/master/examples/asteroid_shape_from_earth/A1046.M1863.obj'
-
 const asteroid = viz.createShape('asteroid', {
   ephem: ephem,
   shape: {
-    shapeUrl: shapeData,
+    shapeUrl: '../tmp/A1046.M1863.obj',
   },
   rotation: {
     lambdaDeg: 251,
