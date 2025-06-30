@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+#spacekit-container {
+  width: 70%;
+  height: 100vh;
+}
