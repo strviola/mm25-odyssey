@@ -13,8 +13,7 @@ function App() {
   const apiToken = import.meta.env.VITE_TEXTALIVE_API_TOKEN;
   console.log(apiToken);
   const player = new Player({
-    app: { token: apiToken },
-    mediaElement: document.querySelector('#media')
+    app: { token: apiToken }
   });
   // setup spacekit    
   const viz = new Simulation(document.getElementById('spacekit-container'), {
@@ -40,7 +39,9 @@ function App() {
       // 再生ボタン
       document.querySelectorAll('.play').forEach((playButton) => {
         playButton.addEventListener('click', () => {
-          player.video && player.requestPlay();
+          if (player.video && !player.isPlaying) {
+            player.requestPlay();
+          }
         })
       });
 
@@ -62,13 +63,6 @@ function App() {
         .addEventListener('click', () => {
           player.video && player.requestMediaSeek(0);
         });
-
-      // "TextAlive ホストの有無" にリンクを設定
-      const url = 'https://developer.textalive.jp/app/run/?ta_app_url=https%3A%2F%2Ftextalivejp.github.io%2Ftextalive-app-basic%2F&ta_song_url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DygY2qObZv24';
-      document.querySelector('#header a').setAttribute('href', url);
-    } else {
-      const url = 'https://textalivejp.github.io/textalive-app-basic/';
-      document.querySelector('#header a').setAttribute('href', url);
     }
 
     // 音楽データを読み込む
@@ -132,49 +126,35 @@ function App() {
   }
 
   function onPlay() {
-    document.querySelector('#overlay').style.display = 'none';
+    // オーバーレイが削除されたので何もしない
   }
 
   function onPause() {
-    document.querySelector('#text').textContent = '-';
+    // テキスト表示が削除されたので何もしない
   }
 
   function onStop() {
-    document.querySelector('text').textContent = '-'
+    // テキスト表示が削除されたので何もしない
   }
 
   return (
     <>
-      <div id="overlay">
-        <button className="play" disabled>Play</button>
-      </div>
       <TextView />
-      <div id="media"></div>
-      <div id="header">
-        <div id="meta">
-          <div id="artist">
-            <strong>Artist:</strong> <span>-</span>
-          </div>
-          <div id="song">
-            <strong>Song title:</strong> <span>-</span>
-          </div>
+      <div id="meta">
+        <div id="song">
+          <strong>Music: </strong> <span>-</span>
         </div>
-        <ul>
-          <li>発声中の歌詞テキストがあれば表示されます</li>
-          <li><a target="_blank">TextAlive ホストの有無</a>により再生コントロールの表示状態が切り替わります</li>
-        </ul>
-      </div>
-      <div id="footer">
         <p>
+          {/* TODO: 再生時間表示。完成間際に消す */}
           <span id="position">
             <strong>-</strong> [ms]
           </span>
         </p>
         <div id="control" style={{display: "none"}}>
-          <button className="play" disabled>再生</button>
-          <button id="jump" disabled>歌詞頭出し</button>
-          <button id="pause" disabled>一時停止</button>
-          <button id="rewind" disabled>巻き戻し</button>
+          <button className="play" disabled>Play</button>
+          <button id="jump" disabled>Jump to lyric</button>
+          <button id="pause" disabled>Pause</button>
+          <button id="rewind" disabled>Rewind</button>
         </div>
       </div>
     </>

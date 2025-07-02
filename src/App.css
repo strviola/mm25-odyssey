@@ -1,8 +1,11 @@
 #root {
+  position: relative;
+  z-index: 1;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: left;
+  background-color: transparent;
 }
 
 .logo {
@@ -41,7 +44,50 @@
   color: #888;
 }
 
+#overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+#overlay button {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  background-color: rgba(26, 26, 26, 0.9);
+  color: white;
+  border: 2px solid #646cff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+#overlay button:hover {
+  background-color: #646cff;
+  transform: scale(1.05);
+}
+
 #spacekit-container {
-  width: 70%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   height: 100vh;
+  z-index: 0;
+}
+
+#root {
+  pointer-events: none;
+}
+
+#root * {
+  pointer-events: auto;
+}
+
+#meta {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
 }

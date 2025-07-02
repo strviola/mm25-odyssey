@@ -2,15 +2,12 @@ import { Ephem } from 'spacekit.js';
 
 export const animateMain = (_video, player, viz) => {
   // metadata
-  const artistSpan = document.querySelector('#artist span');
   const songSpan = document.querySelector('#song span');
-  artistSpan.textContent = player.data.song.artist.name;
-  songSpan.textContent = player.data.song.name;
+  songSpan.textContent = `${player.data.song.name} / ${player.data.song.artist.name}`;
 
   // 定期的に呼ばれる各単語の "animate" 関数をセットする
   let w = player.video.firstWord;
   let renderingText = '';
-  const textContainer = document.querySelector('#text');
 
   // generate asteroid
   const ephem = new Ephem({
