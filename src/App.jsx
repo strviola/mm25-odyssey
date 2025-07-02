@@ -138,14 +138,10 @@ function App() {
   return (
     <>
       <TextView />
-      <div id="header">
-        <div id="meta">
-          <div id="song">
-            <strong>Music: </strong> <span>-</span>
-          </div>
+      <div id="meta">
+        <div id="song">
+          <strong>Music: </strong> <span>-</span>
         </div>
-      </div>
-      <div id="footer">
         <p>
           <span id="position">
             <strong>-</strong> [ms]
