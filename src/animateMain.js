@@ -8,7 +8,6 @@ export const animateMain = (_video, player, viz) => {
   // 定期的に呼ばれる各単語の "animate" 関数をセットする
   let w = player.video.firstWord;
   let renderingText = '';
-  const textContainer = document.querySelector('#text');
 
   // generate asteroid
   const ephem = new Ephem({

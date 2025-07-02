@@ -13,8 +13,7 @@ function App() {
   const apiToken = import.meta.env.VITE_TEXTALIVE_API_TOKEN;
   console.log(apiToken);
   const player = new Player({
-    app: { token: apiToken },
-    mediaElement: document.querySelector('#media')
+    app: { token: apiToken }
   });
   // setup spacekit    
   const viz = new Simulation(document.getElementById('spacekit-container'), {
@@ -129,17 +128,16 @@ function App() {
   }
 
   function onPause() {
-    document.querySelector('#text').textContent = '-';
+    // テキスト表示が削除されたので何もしない
   }
 
   function onStop() {
-    document.querySelector('text').textContent = '-'
+    // テキスト表示が削除されたので何もしない
   }
 
   return (
     <>
       <TextView />
-      <div id="media"></div>
       <div id="header">
         <div id="meta">
           <div id="song">

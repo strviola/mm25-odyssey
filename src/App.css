@@ -5,8 +5,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: left;
-  background-color: rgba(36, 36, 36, 0.8);
-  backdrop-filter: blur(5px);
+  background-color: transparent;
 }
 
 .logo {
