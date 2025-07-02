@@ -132,7 +132,7 @@ function App() {
   }
 
   function onPlay() {
-    document.querySelector('#overlay').style.display = 'none';
+    // オーバーレイが削除されたので何もしない
   }
 
   function onPause() {
@@ -145,9 +145,6 @@ function App() {
 
   return (
     <>
-      <div id="overlay">
-        <button className="play" disabled>Play</button>
-      </div>
       <TextView />
       <div id="media"></div>
       <div id="header">
