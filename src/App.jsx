@@ -62,13 +62,6 @@ function App() {
         .addEventListener('click', () => {
           player.video && player.requestMediaSeek(0);
         });
-
-      // "TextAlive ホストの有無" にリンクを設定
-      const url = 'https://developer.textalive.jp/app/run/?ta_app_url=https%3A%2F%2Ftextalivejp.github.io%2Ftextalive-app-basic%2F&ta_song_url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DygY2qObZv24';
-      document.querySelector('#header a').setAttribute('href', url);
-    } else {
-      const url = 'https://textalivejp.github.io/textalive-app-basic/';
-      document.querySelector('#header a').setAttribute('href', url);
     }
 
     // 音楽データを読み込む
@@ -153,10 +146,6 @@ function App() {
             <strong>Music: </strong> <span>-</span>
           </div>
         </div>
-        <ul>
-          <li>発声中の歌詞テキストがあれば表示されます</li>
-          <li><a target="_blank">TextAlive ホストの有無</a>により再生コントロールの表示状態が切り替わります</li>
-        </ul>
       </div>
       <div id="footer">
         <p>
