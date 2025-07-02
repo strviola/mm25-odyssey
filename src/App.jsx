@@ -145,6 +145,7 @@ function App() {
           <strong>Music: </strong> <span>-</span>
         </div>
         <p>
+          {/* TODO: 再生時間表示。完成間際に消す */}
           <span id="position">
             <strong>-</strong> [ms]
           </span>
