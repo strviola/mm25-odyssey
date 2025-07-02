@@ -148,10 +148,10 @@ function App() {
           </span>
         </p>
         <div id="control" style={{display: "none"}}>
-          <button className="play" disabled>再生</button>
-          <button id="jump" disabled>歌詞頭出し</button>
-          <button id="pause" disabled>一時停止</button>
-          <button id="rewind" disabled>巻き戻し</button>
+          <button className="play" disabled>Play</button>
+          <button id="jump" disabled>Jump to lyric</button>
+          <button id="pause" disabled>Pause</button>
+          <button id="rewind" disabled>Rewind</button>
         </div>
       </div>
     </>
