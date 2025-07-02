@@ -39,7 +39,9 @@ function App() {
       // 再生ボタン
       document.querySelectorAll('.play').forEach((playButton) => {
         playButton.addEventListener('click', () => {
-          player.video && player.requestPlay();
+          if (player.video && !player.isPlaying) {
+            player.requestPlay();
+          }
         })
       });
 
