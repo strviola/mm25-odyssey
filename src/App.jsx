@@ -152,11 +152,8 @@ function App() {
       <div id="media"></div>
       <div id="header">
         <div id="meta">
-          <div id="artist">
-            <strong>Artist:</strong> <span>-</span>
-          </div>
           <div id="song">
-            <strong>Song title:</strong> <span>-</span>
+            <strong>Music: </strong> <span>-</span>
           </div>
         </div>
         <ul>
