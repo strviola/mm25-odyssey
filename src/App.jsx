@@ -19,7 +19,9 @@ function App() {
   const viz = new Simulation(document.getElementById('spacekit-container'), {
     basePath: './node_modules/spacekit.js/src',
   });
-  
+
+  let c;
+
   // Register event listeners
   player.addListener({
     onAppReady,
@@ -104,7 +106,10 @@ function App() {
   // param v: IVideo
   // https://developer.textalive.jp/packages/textalive-app-api/interfaces/ivideo.html
   function onVideoReady(v) {
-    animateMain(v, player, viz);
+    // set music info metadata
+    const songSpan = document.querySelector('#song span');
+    songSpan.textContent = `${player.data.song.name} / ${player.data.song.artist.name}`;
+    c = null;
   }
 
   function onTimerReady(_timer) {
@@ -123,6 +128,25 @@ function App() {
   function onTimeUpdate(position) {
     document.querySelector('#position strong')
       .textContent = String(Math.floor(position));
+
+    // 巻き戻っていたら歌詞表示をリセットする
+    if (c && c.startTime > position + 1000) {
+      c = null;
+      while (textContainer.firstChild) {
+        textContainer.removeChild(textContainer.firstChild);
+      }
+    }
+
+    // 500ms先に発声される文字を取得
+    let current = c === null ? player.video.firstChar : c;
+    while (current && current.startTime < position + 500) {
+      // 新しい文字が発声されようとしている
+      if (c !== current) {
+        c = current;
+        animateMain(current, viz);
+      }
+      current = current.next;
+    }
   }
 
   function onPlay() {
