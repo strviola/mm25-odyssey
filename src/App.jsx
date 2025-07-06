@@ -6,6 +6,7 @@ import {
   SpaceObjectPresets,
   // Ephem,
 } from 'spacekit.js';
+import { TechCredits } from "./components/TechCredits";
 
 function App() {
   // TextAlive Player を作る
@@ -179,6 +180,7 @@ function App() {
           <button id="pause" disabled>Pause</button>
           <button id="rewind" disabled>Rewind</button>
         </div>
+        <TechCredits />
       </div>
     </>
   )
