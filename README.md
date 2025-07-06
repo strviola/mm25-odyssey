@@ -1,12 +1,47 @@
-# React + Vite
+# Music Odyssey
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[マジカルミライ2025 プログラミングコンテスト](https://magicalmirai.com/2025/procon/) 応募作品
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+このアプリは、楽曲の歌詞とリズムに合わせて宇宙空間に小惑星の軌道を描画する音楽可視化アプリケーションです。TextAlive APIを使用して楽曲データを取得し、SpaceKit.jsで3D宇宙空間をレンダリングします。
 
-## Expanding the ESLint configuration
+## 技術スタック
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** - UIフレームワーク
+- **Vite** - ビルドツール
+- **TextAlive API** - 楽曲データ取得・音楽同期
+- **SpaceKit.js** - 3D宇宙空間可視化
+- **Songle API** - 楽曲解析データ
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 2. 環境変数の設定
+
+`.env.local` ファイルを作成し、TextAlive APIトークンを設定してください：
+
+```
+VITE_TEXTALIVE_API_TOKEN=your_api_token_here
+```
+
+### 3. ローカルサーバーの起動
+
+```bash
+npm run dev
+```
+
+ブラウザで `http://localhost:5173` を開くとアプリが起動します。
+
+## 使用方法
+
+1. アプリが起動すると、楽曲データの読み込みが始まります
+2. 「Play」ボタンで楽曲を再生開始
+3. 歌詞に合わせて小惑星が宇宙空間に生成されます
+4. 各種コントロールボタンで再生操作が可能
+5. マウスのドラッグ操作・ホイール操作で空間の移動操作が可能
