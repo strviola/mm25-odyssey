@@ -64,6 +64,10 @@ function App() {
       document.querySelector('#rewind')
         .addEventListener('click', () => {
           player.video && player.requestMediaSeek(0);
+          // 小惑星ラベルを全て削除
+          document.querySelectorAll('.spacekit__object-label').forEach((label) => {
+            label.remove();
+          });
         });
     }
 
