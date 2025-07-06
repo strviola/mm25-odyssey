@@ -33,6 +33,12 @@ function App() {
     onStop,
   });
 
+  function resetLyrics() {
+    document.querySelectorAll('.spacekit__object-label').forEach((label) => {
+      label.remove();
+    });
+  }
+
   // TextAlive App が初期化された時に呼ばれる
   function onAppReady(app) {
     if (!app.managed) {
@@ -64,10 +70,7 @@ function App() {
       document.querySelector('#rewind')
         .addEventListener('click', () => {
           player.video && player.requestMediaSeek(0);
-          // 小惑星ラベルを全て削除
-          document.querySelectorAll('.spacekit__object-label').forEach((label) => {
-            label.remove();
-          });
+          resetLyrics();
         });
     }
 
@@ -150,6 +153,12 @@ function App() {
         animateMain(current, viz);
       }
       current = current.next;
+    }
+
+    // 10秒おきに歌詞の表示を全て削除
+
+    if (Math.floor(position) % 5000 <= 10) {
+      resetLyrics();
     }
   }
 
