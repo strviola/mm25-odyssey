@@ -1,6 +1,5 @@
 import { Player } from "textalive-app-api";
 import { TextView } from "./components/TextView";
-import './App.css'
 import { animateMain } from "./animateMain";
 import {
   Simulation,
