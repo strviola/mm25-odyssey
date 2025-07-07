@@ -21,6 +21,7 @@ function App() {
   });
 
   let c;
+  let p;
 
   // Register event listeners
   player.addListener({
@@ -139,14 +140,15 @@ function App() {
     // 巻き戻っていたら歌詞表示をリセットする
     if (c && c.startTime > position + 1000) {
       c = null;
+      p = null;
       while (textContainer.firstChild) {
         textContainer.removeChild(textContainer.firstChild);
       }
     }
 
-    // 500ms先に発声される文字を取得
-    let current = c === null ? player.video.firstChar : c;
-    while (current && current.startTime < position + 500) {
+    // 100ms先に発声される文字を取得
+    let current = c || player.video.firstChar;
+    while (current && current.startTime < position + 100) {
       // 新しい文字が発声されようとしている
       if (c !== current) {
         c = current;
@@ -155,9 +157,12 @@ function App() {
       current = current.next;
     }
 
-    // 10秒おきに歌詞の表示を全て削除
-
-    if (Math.floor(position) % 5000 <= 10) {
+    // フレーズおきに歌詞の表示を全て削除
+    const startTimes = player.video.phrases.map((p) => p.startTime);
+    if (
+      startTimes.some((time) => Math.abs(time - position) < 100) &&
+      document.querySelectorAll('.spacekit__object-label').length >= 30
+    ) {
       resetLyrics();
     }
   }
