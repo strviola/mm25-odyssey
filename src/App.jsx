@@ -17,7 +17,7 @@ function App() {
   });
   // setup spacekit    
   const viz = new Simulation(document.getElementById('spacekit-container'), {
-    basePath: './node_modules/spacekit.js/src',
+    basePath: './src',
   });
 
   let c;
