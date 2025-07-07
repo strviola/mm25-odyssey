@@ -4,7 +4,7 @@ import { animateMain } from "./animateMain";
 import {
   Simulation,
   SpaceObjectPresets,
-  // Ephem,
+  SkyboxPresets,
 } from 'spacekit.js';
 import { TechCredits } from "./components/TechCredits";
 
@@ -33,6 +33,12 @@ function App() {
     onStop,
   });
 
+  function resetLyrics() {
+    document.querySelectorAll('.spacekit__object-label').forEach((label) => {
+      label.remove();
+    });
+  }
+
   // TextAlive App が初期化された時に呼ばれる
   function onAppReady(app) {
     if (!app.managed) {
@@ -47,13 +53,6 @@ function App() {
         })
       });
 
-      // 歌詞頭出しボタン
-      document.querySelector('#jump')
-        .addEventListener('click', () => {
-          player.video &&
-          player.requestMediaSeek(player.video.firstChar.startTime);
-        });
-
       // 一時停止ボタン
       document.querySelector('#pause')
         .addEventListener('click', () => {
@@ -64,6 +63,7 @@ function App() {
       document.querySelector('#rewind')
         .addEventListener('click', () => {
           player.video && player.requestMediaSeek(0);
+          resetLyrics();
         });
     }
 
@@ -90,6 +90,7 @@ function App() {
     
     // Create our first object - the sun - using a preset space object.
     viz.createObject('sun', SpaceObjectPresets.SUN);
+    viz.createSkybox(SkyboxPresets.NASA_TYCHO);
     
     // Then add some planets
     viz.createObject('mercury', SpaceObjectPresets.MERCURY);
@@ -120,15 +121,9 @@ function App() {
           button.disabled = false
         });
     }
-
-    // 歌詞が無ければ歌詞頭出しボタンを無効にする
-    document.querySelector('#jump').disabled = !player.video.firstChar;
   }
 
   function onTimeUpdate(position) {
-    document.querySelector('#position strong')
-      .textContent = String(Math.floor(position));
-
     // 巻き戻っていたら歌詞表示をリセットする
     if (c && c.startTime > position + 1000) {
       c = null;
@@ -137,15 +132,24 @@ function App() {
       }
     }
 
-    // 500ms先に発声される文字を取得
-    let current = c === null ? player.video.firstChar : c;
-    while (current && current.startTime < position + 500) {
+    // 100ms先に発声される文字を取得
+    let current = c || player.video.firstChar;
+    while (current && current.startTime < position + 100) {
       // 新しい文字が発声されようとしている
       if (c !== current) {
         c = current;
         animateMain(current, viz);
       }
       current = current.next;
+    }
+
+    // フレーズおきに歌詞の表示を全て削除
+    const startTimes = player.video.phrases.map((p) => p.startTime);
+    if (
+      startTimes.some((time) => Math.abs(time - position) < 100) &&
+      document.querySelectorAll('.spacekit__object-label').length >= 50
+    ) {
+      resetLyrics();
     }
   }
 
@@ -168,15 +172,9 @@ function App() {
         <div id="song">
           <strong>Music: </strong> <span>-</span>
         </div>
-        <p>
-          {/* TODO: 再生時間表示。完成間際に消す */}
-          <span id="position">
-            <strong>-</strong> [ms]
-          </span>
-        </p>
+        <div class="spacing" />
         <div id="control" style={{display: "none"}}>
           <button className="play" disabled>Play</button>
-          <button id="jump" disabled>Jump to lyric</button>
           <button id="pause" disabled>Pause</button>
           <button id="rewind" disabled>Rewind</button>
         </div>

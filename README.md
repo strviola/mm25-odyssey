@@ -4,15 +4,13 @@
 
 ## 概要
 
-このアプリは、楽曲の歌詞とリズムに合わせて宇宙空間に小惑星の軌道を描画する音楽可視化アプリケーションです。TextAlive APIを使用して楽曲データを取得し、SpaceKit.jsで3D宇宙空間をレンダリングします。
+音楽に合わせて宇宙空間に言葉が飛びます。TextAlive APIを使用して楽曲データを取得し、SpaceKit.jsで3D宇宙空間をレンダリングしています。言葉の軌道は実在の小惑星群であるペルセウス座流星群を再現しています。
 
 ## 技術スタック
 
-- **React** - UIフレームワーク
-- **Vite** - ビルドツール
-- **TextAlive API** - 楽曲データ取得・音楽同期
-- **SpaceKit.js** - 3D宇宙空間可視化
-- **Songle API** - 楽曲解析データ
+- [**TextAlive API**](https://developer.textalive.jp/) - 楽曲データ取得・音楽同期
+- [**Songle API**](https://api.songle.jp/) - 楽曲解析データ
+- [**SpaceKit.js**](https://typpo.github.io/spacekit/) - 3D宇宙空間レンダリング
 
 ## セットアップ
 
