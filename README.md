@@ -28,7 +28,15 @@ npm install
 VITE_TEXTALIVE_API_TOKEN=your_api_token_here
 ```
 
-### 3. ローカルサーバーの起動
+### 3. アセットファイルのコピー
+
+```
+mkdir -p spacekit
+cp -r ./node_modules/spacekit.js/src/data spacekit/
+cp -r ./node_modules/spacekit.js/src/assets spacekit/
+```
+
+### 4. ローカルサーバーの起動
 
 ```bash
 npm run dev
@@ -44,6 +52,6 @@ npm run dev
 4. 各種コントロールボタンで再生操作が可能
 5. マウスのドラッグ操作・ホイール操作で空間の移動操作が可能
 
-※ Netlify で公開するためにコードを調整したため、localhostでの起動では表示が乱れる可能性があります。その場合は以下のURLにアクセスし、動作確認をお願いいたします。
+または、以下のURLから動作確認ができます。
 
 https://imaginative-cheesecake-cfbb63.netlify.app/
