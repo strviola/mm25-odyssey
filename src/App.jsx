@@ -135,9 +135,6 @@ function App() {
   }
 
   function onTimeUpdate(position) {
-    document.querySelector('#position strong')
-      .textContent = String(Math.floor(position));
-
     // 巻き戻っていたら歌詞表示をリセットする
     if (c && c.startTime > position + 1000) {
       c = null;
@@ -187,12 +184,7 @@ function App() {
         <div id="song">
           <strong>Music: </strong> <span>-</span>
         </div>
-        <p>
-          {/* TODO: 再生時間表示。完成間際に消す */}
-          <span id="position">
-            <strong>-</strong> [ms]
-          </span>
-        </p>
+        <div class="spacing" />
         <div id="control" style={{display: "none"}}>
           <button className="play" disabled>Play</button>
           <button id="jump" disabled>Jump to lyric</button>

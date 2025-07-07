@@ -73,7 +73,11 @@ button:focus-visible {
   z-index: 1000;
 }
 
-/* Spacekit スタイル */
+.spacing {
+  width: 100%;
+  margin-top: 15px;
+}
+
 .spacekit__object-label {
   font-family: "游明朝", "Yu Mincho", "游明朝体", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif !important;
   background: none !important;
