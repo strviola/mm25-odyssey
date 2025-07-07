@@ -21,7 +21,6 @@ function App() {
   });
 
   let c;
-  let p;
 
   // Register event listeners
   player.addListener({
@@ -128,7 +127,6 @@ function App() {
     // 巻き戻っていたら歌詞表示をリセットする
     if (c && c.startTime > position + 1000) {
       c = null;
-      p = null;
       while (textContainer.firstChild) {
         textContainer.removeChild(textContainer.firstChild);
       }
