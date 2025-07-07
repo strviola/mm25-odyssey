@@ -172,7 +172,7 @@ function App() {
         <div id="song">
           <strong>Music: </strong> <span>-</span>
         </div>
-        <div class="spacing" />
+        <div className="spacing" />
         <div id="control" style={{display: "none"}}>
           <button className="play" disabled>Play</button>
           <button id="pause" disabled>Pause</button>
