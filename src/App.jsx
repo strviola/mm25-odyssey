@@ -54,13 +54,6 @@ function App() {
         })
       });
 
-      // 歌詞頭出しボタン
-      document.querySelector('#jump')
-        .addEventListener('click', () => {
-          player.video &&
-          player.requestMediaSeek(player.video.firstChar.startTime);
-        });
-
       // 一時停止ボタン
       document.querySelector('#pause')
         .addEventListener('click', () => {
@@ -129,9 +122,6 @@ function App() {
           button.disabled = false
         });
     }
-
-    // 歌詞が無ければ歌詞頭出しボタンを無効にする
-    document.querySelector('#jump').disabled = !player.video.firstChar;
   }
 
   function onTimeUpdate(position) {
@@ -187,7 +177,6 @@ function App() {
         <div class="spacing" />
         <div id="control" style={{display: "none"}}>
           <button className="play" disabled>Play</button>
-          <button id="jump" disabled>Jump to lyric</button>
           <button id="pause" disabled>Pause</button>
           <button id="rewind" disabled>Rewind</button>
         </div>
