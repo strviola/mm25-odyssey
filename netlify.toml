@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && mkdir -p dist/src && cp -r ./node_modules/spacekit.js/src/data dist/src/ && cp -r ./node_modules/spacekit.js/src/assets dist/src/"
+  command = "npm run build && mkdir -p dist/spacekit && cp -r ./node_modules/spacekit.js/src/data dist/spacekit/ && cp -r ./node_modules/spacekit.js/src/assets dist/spacekit/"
   publish = "dist"
 
 [[redirects]]
