@@ -4,7 +4,7 @@ import { animateMain } from "./animateMain";
 import {
   Simulation,
   SpaceObjectPresets,
-  // Ephem,
+  SkyboxPresets,
 } from 'spacekit.js';
 import { TechCredits } from "./components/TechCredits";
 
@@ -98,6 +98,7 @@ function App() {
     
     // Create our first object - the sun - using a preset space object.
     viz.createObject('sun', SpaceObjectPresets.SUN);
+    viz.createSkybox(SkyboxPresets.NASA_TYCHO);
     
     // Then add some planets
     viz.createObject('mercury', SpaceObjectPresets.MERCURY);
@@ -161,7 +162,7 @@ function App() {
     const startTimes = player.video.phrases.map((p) => p.startTime);
     if (
       startTimes.some((time) => Math.abs(time - position) < 100) &&
-      document.querySelectorAll('.spacekit__object-label').length >= 30
+      document.querySelectorAll('.spacekit__object-label').length >= 50
     ) {
       resetLyrics();
     }
