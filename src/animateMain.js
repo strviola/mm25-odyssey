@@ -13,18 +13,19 @@ export const animateMain = (word, viz) => {
       i: selectedData.i * Math.PI / 180,
       om: selectedData.om * Math.PI / 180,
       w: selectedData.w * Math.PI / 180,
-      ma: Math.random() * 2 * Math.PI,
+      ma: 0,
       epoch: Math.random() * 2500000,
     };
   } else {
     // フォールバック用のデフォルト値
     ephemData = {
       a: 7.55,
-      om: 134.9919,
       e: 0.8726,
-      i: 110.55,
-      q: 0.96173,
-      w: 152.76,
+      i: 110.55 * Math.PI / 180,
+      om: 134.9919 * Math.PI / 180,
+      w: 152.76 * Math.PI / 180,
+      ma: 0,
+      epoch: Math.random() * 2500000,
     };
   }
   
